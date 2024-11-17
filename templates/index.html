@@ -12,11 +12,10 @@
     <div class="sidebar">
       <img src="{{ url_for('static', filename='images/AnchorzUpLogo.svg') }}" alt="AnchorzUp Logo" class="logo">
       <div class="shortened-urls-container">
-        <h2>My shortened URLs</h2>
+        <h2 style="margin-right: 50px">My shortened URLs</h2>
         <ul class="shortened-urls">
           {% for link in links %}
           <li>
-            <!-- Adding the full prefix to the short URL -->
               <!-- Use link.short_url directly without prefixing it again -->
              <a href="{{ link.short_url }}" target="_blank" style="text-decoration: underline;">
                {{ link.short_url }}
@@ -33,7 +32,7 @@
     <!-- Main Content -->
     <div class="main-content">
       <!-- Updated title style -->
-      <h1 id="title-url" style="margin-left: 0; text-align: left;">URL Shortener</h1>
+      <h1 id="title-url" style="margin-right: 320px">URL Shortener</h1>
       <form action="/" method="POST">
         <div class="url-form">
           <input type="text" name="original_url" placeholder="Paste the URL to be shortened" class="url-input" required>
