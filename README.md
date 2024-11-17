@@ -57,3 +57,8 @@ Open your browser and navigate to the following URL:
    CSS file for styling the UI.
 
 ---
+## Demo Video
+
+[Watch the demo video here](https://github.com/ylljetakicaj/AnchorzUpTask-URL/blob/main/static/video/AnchorzUpTask-URL%20Video.mp4)
+
+
