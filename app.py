@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, request
 import sqlite3
 from shortuuid import ShortUUID
 import time
@@ -24,10 +24,10 @@ def index():
         # Retrieve form data
         original_url = request.form.get("original_url")
         expiration_option = request.form.get("expiration")
-        
+
         if not original_url or not expiration_option:
             return redirect(url_for("index"))  # Ensure fields are filled
-        
+
         # Convert expiration option into seconds
         expiration_map = {
             "1 minute": 60,
@@ -38,15 +38,16 @@ def index():
         }
         expiration_seconds = expiration_map.get(expiration_option)
         expiration_time = int(time.time()) + expiration_seconds
-        
+
         # Generate a short URL
-        short_url = ShortUUID().random(length=6)
+        short_identifier = ShortUUID().random(length=6)
+        short_url = request.host_url.rstrip('/') + '/' + short_identifier
 
         # Store in database
         with sqlite3.connect(db_file) as conn:
             conn.execute("INSERT INTO links (original_url, short_url, expiration) VALUES (?, ?, ?)",
                          (original_url, short_url, expiration_time))
-        
+
         return redirect(url_for("index"))
 
     # Retrieve active links from the database
@@ -57,11 +58,11 @@ def index():
 
     return render_template("index.html", links=links)
 
-@app.route("/<short_url>")
-def redirect_to_url(short_url):
+@app.route("/<short_identifier>")
+def redirect_to_url(short_identifier):
     with sqlite3.connect(db_file) as conn:
-        cur = conn.execute("SELECT original_url FROM links WHERE short_url = ? AND expiration > ?", 
-                           (short_url, int(time.time())))
+        cur = conn.execute("SELECT original_url FROM links WHERE short_url LIKE ? AND expiration > ?", 
+                           (f"%/{short_identifier}", int(time.time())))
         result = cur.fetchone()
         if result:
             return redirect(result[0])  # Redirect to the original URL

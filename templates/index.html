@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>URL Shortener</title>
+  <title id="title-url">URL Shortener</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -16,10 +16,14 @@
         <ul class="shortened-urls">
           {% for link in links %}
           <li>
-            <a href="/{{ link.short_url }}" target="_blank">{{ link.short_url }}</a>
-            <form action="/delete/{{ link.id }}" method="POST" class="delete-form">
-              <button type="submit" class="delete">🗑️</button>
-            </form>
+            <!-- Adding the full prefix to the short URL -->
+              <!-- Use link.short_url directly without prefixing it again -->
+             <a href="{{ link.short_url }}" target="_blank" style="text-decoration: underline;">
+               {{ link.short_url }}
+             </a>
+             <form action="/delete/{{ link.id }}" method="POST" class="delete-form" style="display:inline;">
+             <button type="submit" class="delete" style="border: none; background: transparent; cursor: pointer;">🗑️</button>
+              </form>
           </li>
           {% endfor %}
         </ul>
@@ -28,7 +32,8 @@
 
     <!-- Main Content -->
     <div class="main-content">
-      <h1>URL Shortener</h1>
+      <!-- Updated title style -->
+      <h1 id="title-url" style="margin-left: 0; text-align: left;">URL Shortener</h1>
       <form action="/" method="POST">
         <div class="url-form">
           <input type="text" name="original_url" placeholder="Paste the URL to be shortened" class="url-input" required>
