@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <img src="{{ url_for('static', filename='images/AnchorzUpLogo.svg') }}" alt="AnchorzUp Logo" class="logo">
+      <div class="shortened-urls-container">
+        <h2>My shortened URLs</h2>
+        <ul class="shortened-urls">
+          {% for link in links %}
+          <li>
+            <a href="/{{ link.short_url }}" target="_blank">{{ link.short_url }}</a>
+            <form action="/delete/{{ link.id }}" method="POST" class="delete-form">
+              <button type="submit" class="delete">🗑️</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h1>URL Shortener</h1>
+      <form action="/" method="POST">
+        <div class="url-form">
+          <input type="text" name="original_url" placeholder="Paste the URL to be shortened" class="url-input" required>
+          <select name="expiration" class="expiration-select" required>
+            <option disabled selected>Add expiration date</option>
+            <option>1 minute</option>
+            <option>5 minutes</option>
+            <option>30 minutes</option>
+            <option>1 hour</option>
+            <option>5 hours</option>
+          </select>
+        </div>
+        <button type="submit" class="shorten-button">Shorten URL</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
