@@ -24,7 +24,7 @@ To run this project, ensure you have the following installed on your system:
 
 ### How to run
 
-Before running the application, ensure all required dependencies are installed using the > requirements.txt file. Run the following command:
+Before running the application, ensure all required dependencies are installed using the ```requirements.txt``` file. Run the following command:
 ```pip install -r requirements.txt```
 
 
@@ -38,5 +38,22 @@ Use the following command to start the application:
 **Access the Application:**
 Open your browser and navigate to the following URL:
 ```http://127.0.0.1:5000```
+
+---
+## Application Structure
+
+### Main Files:
+
+1. **`app.py`**:  
+   The core Flask application that handles routes and logic:
+   - `/` (GET/POST): The homepage for shortening and managing URLs.
+   - `/<short_identifier>`: Redirects to the original URL if the shortened URL is active and not expired.
+   - `/delete/<int:link_id>`: Deletes a shortened URL from the database.
+
+2. **`index.html`**:  
+   The main HTML file containing the UI for the URL shortener.
+
+3. **`styles.css`**:  
+   CSS file for styling the UI.
 
 ---
