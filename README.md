@@ -20,14 +20,13 @@ To run this project, ensure you have the following installed on your system:
 - Python 3.8 or later
 - Pip (Python package manager)
 
+---
+
 ### How to run
 
-Before running the application, ensure all required dependencies are installed using the 'requirements.txt file'. Run the following command:
+Before running the application, ensure all required dependencies are installed using the > requirements.txt file. Run the following command:
 ```pip install -r requirements.txt```
-'flask
-flask-sqlalchemy
-flask-restful
-shortuuid'
+
 
 **Initialize the Database:**
 Run the application once to initialize the SQLite database. The app will automatically create the database.db file in the project directory if it doesn't already exist.
@@ -40,6 +39,4 @@ Use the following command to start the application:
 Open your browser and navigate to the following URL:
 ```http://127.0.0.1:5000```
 
-
-  
 ---
